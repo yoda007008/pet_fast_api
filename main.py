@@ -15,11 +15,7 @@ second_bd = [
     {"id": 2, "user_id": 2, "currency": "USD", "side": "sell", "price": 80, "amount": 2.12},
 ]
 
-third_bd = [
-    {"id": 1, "role": "admin", "name": "Alma"},
-    {"id": 2, "role": "leader", "name": "Alex"},
-    {"id": 3, "role": "user", "name": "Alan"},
-]
+
 
 @app.get("/users/{user_id}")
 async def get_user_id(user_id: int):
