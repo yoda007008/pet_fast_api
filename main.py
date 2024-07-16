@@ -23,3 +23,6 @@ async def get_user_id(user_id: int):
 async def get_name_id(name_id: str):
     return [user for user in bd if user.get("name") == name_id]
 
+@app.get("/prices")
+async def get_prices(limit: int = 1, offset: int = 0):
+    return second_bd[offset:][:limit]
