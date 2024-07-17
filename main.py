@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
 from datetime import datetime
+from enum import Enum
 
 app = FastAPI(
     title="App"
@@ -17,6 +18,10 @@ second_bd = [
     {"id": 1, "user_id": 1, "currency": "RUB", "side": "buy", "price": 70, "amount": 2.12},
     {"id": 2, "user_id": 2, "currency": "USD", "side": "sell", "price": 80, "amount": 2.12},
 ]
+
+class DegreeType(Enum):
+    newbie = "newbie"
+    expert = "expert"
 
 
 class Degree(BaseModel):
