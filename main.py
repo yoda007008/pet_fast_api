@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
+from datetime import datetime
 
 app = FastAPI(
     title="App"
@@ -17,10 +18,18 @@ second_bd = [
     {"id": 2, "user_id": 2, "currency": "USD", "side": "sell", "price": 80, "amount": 2.12},
 ]
 
+
+class Degree(BaseModel):
+    id: int
+    create_id: datetime
+    type_degree: str
+
+
 class User(BaseModel):
     id: int
     role: str
     name: str
+    degree: List[Degree]
 
 @app.get("/users/{user_id}", response_model=List[User])
 async def get_user_id(user_id: int):
