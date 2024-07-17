@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
+from typing import List
 
 app = FastAPI(
     title="App"
@@ -21,10 +23,14 @@ second_bd = [
 async def get_user_id(user_id: int):
     return [user for user in bd if user.get("id") == user_id]
 
-@app.get("/name_users/{user_id}")
-async def get_name_id(name_id: str):
-    return [user for user in bd if user.get("name") == name_id]
-
-@app.get("/prices")
-async def get_prices(limit: int = 1, offset: int = 0):
-    return second_bd[offset:][:limit]
+class Trade(BaseModel):
+    id: int
+    user_id: int
+    currency: int
+    side: int
+    price: float
+    amount: float
+@app.post("/trades")
+def add_trades(trades: List[Trade]):
+    second_bd.extend(trades)
+    return {"status": 200, "data": second_bd}
