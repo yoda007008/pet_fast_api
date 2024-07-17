@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from typing import List
-from datetime import datetime
+from typing import List, Optional
+
 from enum import Enum
 
 app = FastAPI(
@@ -11,7 +11,9 @@ app = FastAPI(
 bd = [
     {"id": 1, "role": "admin", "name": "Alma"},
     {"id": 2, "role": "leader", "name": "Alex"},
-    {"id": 3, "role": "user", "name": "Alan"},
+    {"id": 3, "role": "user", "name": "Alan", "degree": [
+        {"id": 1, "create_id": "today", "type_degree": "expert"}
+    ]},
 ]
 
 second_bd = [
@@ -26,7 +28,7 @@ class DegreeType(Enum):
 
 class Degree(BaseModel):
     id: int
-    create_id: datetime
+    create_id: str
     type_degree: str
 
 
@@ -34,7 +36,7 @@ class User(BaseModel):
     id: int
     role: str
     name: str
-    degree: List[Degree]
+    degree: Optional[List[Degree]]
 
 @app.get("/users/{user_id}", response_model=List[User])
 async def get_user_id(user_id: int):
