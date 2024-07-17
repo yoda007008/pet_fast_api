@@ -17,9 +17,12 @@ second_bd = [
     {"id": 2, "user_id": 2, "currency": "USD", "side": "sell", "price": 80, "amount": 2.12},
 ]
 
+class User(BaseModel):
+    id: int
+    role: str
+    name: str
 
-
-@app.get("/users/{user_id}")
+@app.get("/users/{user_id}", response_model=List[User])
 async def get_user_id(user_id: int):
     return [user for user in bd if user.get("id") == user_id]
 
@@ -30,6 +33,8 @@ class Trade(BaseModel):
     side: int
     price: float
     amount: float
+
+
 @app.post("/trades")
 def add_trades(trades: List[Trade]):
     second_bd.extend(trades)
