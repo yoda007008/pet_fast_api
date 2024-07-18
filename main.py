@@ -9,7 +9,7 @@ app = FastAPI(
 )
 
 bd = [
-    {"id": 1, "role": "admin", "name": "Alma"},
+    {"id": 1, "role": "admin", "name": "Makaka"},
     {"id": 2, "role": "leader", "name": "Alex"},
     {"id": 3, "role": "user", "name": "Alan", "degree": [
         {"id": 1, "create_id": "today", "type_degree": "expert"}
