@@ -20,7 +20,5 @@ users = Table(
     Column("username", String, primary_key=False),
     Column("password", String, nullable=False),
     Column("registered_at", TIMESTAMP , default=datetime.utcnow),
-    Column(""),
-
-
+    Column("role_id", Integer, ForeignKey("roles.id")),
 )
