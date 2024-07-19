@@ -12,6 +12,8 @@ roles = Table(
     Column("name", String, nullable=False),
     Column("permissions", JSON),
 )
+
+
 users = Table(
     "users",
     metadata,
